@@ -20,6 +20,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"time"
 
 	color "github.com/TwinProduction/go-color"
 	log "github.com/sirupsen/logrus"
@@ -32,7 +34,17 @@ var motivationCmd = &cobra.Command{
 	Short: "Give you a single motivation",
 	Long:  `Fetch a motivation quote from the api and dispalays to you. Every time it will generate new motivation.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		showMotivation()
+		if len(args) > 0 && args[0] == "loop" {
+
+			// Shows 10 motivations
+			for i := 1; i < 10; i++ {
+				showMotivation()
+				time.Sleep(5 * time.Second)
+			}
+
+		} else {
+			showMotivation()
+		}
 	},
 }
 
@@ -52,6 +64,7 @@ func showMotivation() {
 
 	if err := json.Unmarshal(dataBytes, &motivation); err != nil {
 		fmt.Printf("Could to unmarshal the databytes!")
+		os.Exit(0)
 	}
 	fmt.Println(color.Ize(color.Green, string(motivation.Slip.Advice)))
 }
@@ -61,11 +74,13 @@ func getDataFromAPI(url string) []byte {
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Error(err)
+		os.Exit(0)
 	} else {
 
 		responseByte, err = ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Error(err)
+			os.Exit(0)
 		}
 
 	}
