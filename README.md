@@ -9,7 +9,7 @@ golang, cobra
 
 ### Installation
 
-    go get github.com/golang/example/hello
+    go get github.com/sudiptob2/go-motivate-me
 
 ### Usage
 
