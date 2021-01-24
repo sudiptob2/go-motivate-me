@@ -28,18 +28,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var loopFlag bool
+
 // motivationCmd represents the motivation command
 var motivationCmd = &cobra.Command{
 	Use:   "motivation",
 	Short: "Give you a single motivation",
 	Long:  `Fetch a motivation quote from the api and dispalays to you. Every time it will generate new motivation.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) > 0 && args[0] == "loop" {
+		if loopFlag == true {
 
 			// Shows 10 motivations
 			for i := 1; i < 10; i++ {
 				showMotivation()
-				time.Sleep(5 * time.Second)
+				time.Sleep(2 * time.Second)
 			}
 
 		} else {
@@ -91,4 +93,7 @@ func getDataFromAPI(url string) []byte {
 
 func init() {
 	rootCmd.AddCommand(motivationCmd)
+
+	// Ex : go run main.go motivation --loop=true
+	motivationCmd.PersistentFlags().BoolVarP(&loopFlag, "loop", "l", false, "a boolean flag for starting motivation loop of 10 advices(default false)")
 }
