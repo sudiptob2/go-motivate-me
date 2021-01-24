@@ -5,7 +5,7 @@ golang, cobra
 
 ## Getting started
 
-    ![Motivate-me demo GIF](demo/go-motivate-me-demo.gif)
+![Motivate-me demo GIF](demo/go-motivate-me-demo.gif)
 
 ### Installation
 
