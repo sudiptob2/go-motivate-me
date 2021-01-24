@@ -95,5 +95,6 @@ func init() {
 	rootCmd.AddCommand(motivationCmd)
 
 	// Ex : go run main.go motivation --loop=true
+	// or : go run main.go motivation -l
 	motivationCmd.PersistentFlags().BoolVarP(&loopFlag, "loop", "l", false, "a boolean flag for starting motivation loop of 10 advices(default false)")
 }

@@ -3,7 +3,9 @@
 This cli will provide motivational advices in your command line. Built with
 golang, cobra
 
-## The examples
+## Getting started
+
+    ![Motivate-me demo GIF](demo/go-motivate-me-demo.gif)
 
 ### Installation
 
